@@ -1,10 +1,7 @@
-*.iml
-.idea
-target
-bower_components
-node_modules
-node
-*.log
-asciidoctor.css
-README.html
-built
+target/
+.project
+.settings/
+.classpath
+built/
+node/
+node_modules/
