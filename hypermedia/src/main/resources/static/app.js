@@ -121,14 +121,11 @@ class CreateDialog extends React.Component {
 		e.preventDefault();
 		var newEmployee = {};
 		this.props.attributes.forEach(attribute => {
-			newEmployee[attribute] = React.findDOMNode(this.refs[attribute]).value.trim();
+			let el = React.findDOMNode(this.refs[attribute]);
+			newEmployee[attribute] = el.value.trim();
+			el.value = '';
 		});
 		this.props.onCreate(newEmployee);
-
-		// clear out the dialog's inputs
-		this.props.attributes.forEach(attribute => {
-			React.findDOMNode(this.refs[attribute]).value = '';
-		});
 
 		// Navigate away from the dialog to hide it.
 		window.location = "#";
@@ -218,7 +215,7 @@ class EmployeeList extends React.Component {
 
 		var navLinks = [];
 		if ("first" in this.props.links) {
-			navLinks.push(<button key="first" onClick={this.handleNavFirst}>&lt;&lt;</button>);
+			navLinks.push(<button key="first" onClick={() => this.props.onNavigate(this.props.links.first.href)}>&lt;&lt;</button>);
 		}
 		if ("prev" in this.props.links) {
 			navLinks.push(<button key="prev" onClick={this.handleNavPrev}>&lt;</button>);
